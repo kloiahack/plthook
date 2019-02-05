@@ -1,15 +1,40 @@
 #!/bin/bash
 
+cd android
+WORK_DIR=/data/plthook-test
+
 set -e
 
 echodo() {
-  echo ==========================================
-  echo == $@
-  echo ==========================================
+  banner "$@"
   "$@"
   echo
 }
 
-echodo sdkmanager --install ndk-bundle
+banner() {
+  echo ==========================================
+  echo == $@
+  echo ==========================================
+}
+
+echodo sdkmanager ndk-bundle
 echodo sdkmanager --list
 echodo /usr/local/android-sdk/ndk-bundle/ndk-build -B
+
+echodo avdmanager create avd -n test -k "system-images;android-25;default;x86"
+
+banner emulator -avd test -no-window -no-audio
+emulator -avd test -no-window -no-audio &
+EMULATOR_PID=$!
+echo
+
+echodo android-wait-for-emulator
+echodo adb shell "su root mkdir -p $WORK_DIR"
+echodo adb shell "su root chmod 777 $WORK_DIR"
+echodo adb push libs/x86/libtest.so /sdcard
+echodo adb push libs/x86/testprog /sdcard
+echodo adb shell "su root mv /sdcard/libtest.so /sdcard/testprog $WORK_DIR"
+echodo adb shell "su root chmod 755 $WORK_DIR/libtest.so $WORK_DIR/testprog"
+echodo adb shell "su root env LD_LIBRARY_PATH=$WORK_DIR $WORK_DIR/testprog open"
+kill $EMULATOR_PID
+wait $EMULATOR_PID
