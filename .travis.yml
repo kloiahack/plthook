@@ -50,4 +50,4 @@ language: c
 before_install:
   - eval "${MATRIX_EVAL}"
 script:
-  - cd test && if [[ "$OS" == "android" ]]; then make check CROSS=$CROSS; else ./android/run_tests; fi
+  - cd test && if [[ "$OS" == "android" ]]; then ./android/run_tests; else make check CROSS=$CROSS; fi
