@@ -37,7 +37,8 @@ for ARCH in $ARCHS; do
   EMULATOR_PID=$!
   echo
 
-  echodo android-wait-for-emulator
+  #echodo android-wait-for-emulator
+  echodo sleep 20
   echodo adb shell "su root mkdir -p $WORK_DIR"
   echodo adb shell "su root chmod 777 $WORK_DIR"
   echodo adb push libs/$ARCH/libtest.so /sdcard
