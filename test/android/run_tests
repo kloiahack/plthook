@@ -17,7 +17,7 @@ banner() {
   echo ==========================================
 }
 
-echodo sdkmanager ndk-bundle
+echo yes | echodo sdkmanager ndk-bundle
 echodo sdkmanager --list
 echodo /usr/local/android-sdk/ndk-bundle/ndk-build -B
 
