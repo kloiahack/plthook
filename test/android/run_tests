@@ -1,5 +1,15 @@
-#!/bin/sh
-echo ============ environment variables ============
-env | sort
-echo ============ sdkmanager --list ============
-sdkmanager --list
+#!/bin/bash
+
+set -e
+
+echodo() {
+  echo ==========================================
+  echo == $@
+  echo ==========================================
+  "$@"
+  echo
+}
+
+echodo sdkmanager --install ndk-bundle
+echodo sdkmanager --list
+echodo /usr/local/android-sdk/ndk-bundle/ndk-build -B
