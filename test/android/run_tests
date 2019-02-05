@@ -18,8 +18,16 @@ banner() {
   echo ==========================================
 }
 
-echo yes | echodo sdkmanager tools # update tools
-echo yes | echodo sdkmanager ndk-bundle
+banner sdkmanager tools
+# Discard stdout to suppress log size. Test stops when log size > 4M on traivis-ci.
+echo yes | sdkmanager tools > /dev/null
+echo
+
+banner sdkmanager ndk-bundle
+# Discard stdout to suppress log size. Test stops when log size > 4M on traivis-ci.
+echo yes | sdkmanager ndk-bundle > /dev/null
+echo
+
 echodo sdkmanager --list
 echodo ndk-build -B
 
