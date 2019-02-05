@@ -69,6 +69,10 @@
 #error 32-bit application on 64-bit OS is not supported.
 #endif
 
+#if defined __ANDROID_API__ && __ANDROID_API__ < 21 && defined __arm__
+#error Android API should be equal to or greater than 21 for ARM 32-bit target.
+#endif
+
 #if !defined(R_X86_64_JUMP_SLOT) && defined(R_X86_64_JMP_SLOT)
 #define R_X86_64_JUMP_SLOT R_X86_64_JMP_SLOT
 #endif
@@ -121,7 +125,11 @@
 #endif
 #define SIZE_T_FMT "lu"
 #define ELF_WORD_FMT "u"
+#ifdef __ANDROID__
+#define ELF_XWORD_FMT "llu"
+#else
 #define ELF_XWORD_FMT "lu"
+#endif
 #define ELF_SXWORD_FMT "ld"
 #define Elf_Half Elf64_Half
 #define Elf_Xword Elf64_Xword
@@ -169,7 +177,7 @@
 #endif
 #endif /* __LP64__ */
 
-#if defined(PT_GNU_RELRO) && !defined(__sun) && !defined(__ANDROID__)
+#if defined(PT_GNU_RELRO) && !defined(__sun)
 #define SUPPORT_RELRO /* RELRO (RELocation Read-Only) */
 #if !defined(DF_1_NOW) && defined(DF_1_BIND_NOW)
 #define DF_1_NOW DF_1_BIND_NOW
@@ -347,6 +355,7 @@ int plthook_open(plthook_t **plthook_out, const char *filename)
 int plthook_open_by_handle(plthook_t **plthook_out, void *hndl)
 {
 #if defined __ANDROID__
+    set_errmsg("plthook_open_by_handle isn't supported on this platform.");
     return PLTHOOK_NOT_IMPLEMENTED;
 #else
     struct link_map *lmap = NULL;
@@ -366,6 +375,7 @@ int plthook_open_by_handle(plthook_t **plthook_out, void *hndl)
 int plthook_open_by_address(plthook_t **plthook_out, void *address)
 {
 #if defined __FreeBSD__
+    set_errmsg("plthook_open_by_address isn't supported on this platform.");
     return PLTHOOK_NOT_IMPLEMENTED;
 #elif defined __ANDROID__
     struct link_map *lmap = create_link_map_addr(address);

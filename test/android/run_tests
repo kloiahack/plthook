@@ -1,0 +1,5 @@
+#!/bin/sh
+echo ============ environment variables ============
+env | sort
+echo ============ sdkmanager --list ============
+sdkmanager --list
