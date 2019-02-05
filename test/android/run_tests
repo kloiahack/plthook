@@ -2,6 +2,7 @@
 
 cd android
 WORK_DIR=/data/plthook-test
+PATH=$ANDROID_HOME/ndk-bundle:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$PATH
 
 set -e
 
@@ -17,9 +18,10 @@ banner() {
   echo ==========================================
 }
 
+echo yes | echodo sdkmanager tools # update tools
 echo yes | echodo sdkmanager ndk-bundle
 echodo sdkmanager --list
-echodo /usr/local/android-sdk/ndk-bundle/ndk-build -B
+echodo ndk-build -B
 
 echodo avdmanager create avd -n test -k "system-images;android-25;default;x86"
 
