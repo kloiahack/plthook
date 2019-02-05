@@ -31,7 +31,7 @@ echo
 echodo sdkmanager --list
 echodo ndk-build -B
 
-echodo avdmanager create avd -n test -k "system-images;android-25;default;x86"
+echodo avdmanager create avd -n test -k "system-images;android-25;google_apis;x86"
 
 banner emulator -avd test -no-window -no-audio
 emulator -avd test -no-window -no-audio &
