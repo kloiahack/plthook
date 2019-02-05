@@ -32,7 +32,7 @@ echodo sdkmanager --list
 echodo ndk-build -B
 
 ARCHS="arm64-v8a armeabi-v7a x86 x86_64"
-ARCHS="x86"
+ARCHS="arm64-v8a"
 
 for ARCH in $ARCHS; do
   echo no | echodo avdmanager create avd -n test -k "system-images;android-25;google_apis;$ARCH" -f
