@@ -46,16 +46,18 @@ else
 fi
 
 for ABI in $ABIS; do
-  echo no | echodo avdmanager create avd -n test -k "system-images;android-$API;$TAG;$ABI" -f
+  AVD_NAME=android-$API-$TAG-$ABI
+  if ! avdmanager list avd -c | grep "^$AVD_NAME$" > /dev/null; then
+    echo no | echodo avdmanager create avd -n $AVD_NAME -k "system-images;android-$API;$TAG;$ABI" -f
+  fi
 
-  banner emulator -avd test -no-window -no-audio
-  emulator -avd test -no-window -no-audio &
+  banner emulator -avd $AVD_NAME -no-window -no-audio
+  emulator -avd $AVD_NAME -no-window -no-audio &
   EMULATOR_PID=$!
   trap "kill $EMULATOR_PID" EXIT
   echo
 
-  #echodo android-wait-for-emulator
-  echodo sleep 20
+  echodo adb wait-for-device
   echodo adb root
   echodo adb push libs/$ABI/libtest.so /data/local
   echodo adb push libs/$ABI/testprog /data/local
