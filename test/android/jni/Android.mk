@@ -4,6 +4,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE    := libtest
 LOCAL_SRC_FILES := ../../libtest.c
+LOCAL_CFLAGS := -fno-builtin-ceil
 TARGET_PLATFORM := android-22
 
 include $(BUILD_SHARED_LIBRARY)
