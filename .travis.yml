@@ -1,49 +1,49 @@
 matrix:
   include:
-    # - os: linux
-    #   env: OS=linux MATRIX_EVAL=CC=gcc-8
-    #   addons:
-    #     apt:
-    #       sources:
-    #         - ubuntu-toolchain-r-test
-    #       packages:
-    #         - gcc-8
-    #         - gcc-8-multilib
-    #         - libc6-dbg:i386
-    #         - linux-libc-dev:i386
-    #         - valgrind
-    # - os: linux
-    #   # Use QEMU 2.8 in ppa:panfaust/qemu-backports
-    #   env: OS=linux-cross CROSS=1
-    #   dist: xenial
-    #   addons:
-    #     apt:
-    #       sources:
-    #         - sourceline: 'ppa:panfaust/qemu-backports'
-    #       packages:
-    #         - qemu-user
-    #         - gcc-arm-linux-gnueabi
-    #         - gcc-arm-linux-gnueabihf
-    #         - gcc-aarch64-linux-gnu
-    #         - gcc-powerpc-linux-gnu
-    #         - gcc-powerpc64le-linux-gnu
-    #         - libc6-dev-armhf-cross
-    #         - libc6-dev-ppc64el-cross
-    #         - libc6-dev-powerpc-cross
-    #         - libc6-dev-armel-cross
-    #         - libc6-dev-arm64-cross
-    # - os: osx
-    #   env: OS=osx
-    #   # macOS 10.12 Sierra
-    #   osx_image: xcode8.3
-    # - os: osx
-    #   env: OS=osx
-    #   # macOS 10.11 El Capitan
-    #   osx_image: xcode7.3
-    # - os: osx
-    #   env: OS=osx
-    #   # macOS 10.10 Yosemite
-    #   osx_image: xcode6.4
+    - os: linux
+      env: OS=linux MATRIX_EVAL=CC=gcc-8
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-8
+            - gcc-8-multilib
+            - libc6-dbg:i386
+            - linux-libc-dev:i386
+            - valgrind
+    - os: linux
+      # Use QEMU 2.8 in ppa:panfaust/qemu-backports
+      env: OS=linux-cross CROSS=1
+      dist: xenial
+      addons:
+        apt:
+          sources:
+            - sourceline: 'ppa:panfaust/qemu-backports'
+          packages:
+            - qemu-user
+            - gcc-arm-linux-gnueabi
+            - gcc-arm-linux-gnueabihf
+            - gcc-aarch64-linux-gnu
+            - gcc-powerpc-linux-gnu
+            - gcc-powerpc64le-linux-gnu
+            - libc6-dev-armhf-cross
+            - libc6-dev-ppc64el-cross
+            - libc6-dev-powerpc-cross
+            - libc6-dev-armel-cross
+            - libc6-dev-arm64-cross
+    - os: osx
+      env: OS=osx
+      # macOS 10.12 Sierra
+      osx_image: xcode8.3
+    - os: osx
+      env: OS=osx
+      # macOS 10.11 El Capitan
+      osx_image: xcode7.3
+    - os: osx
+      env: OS=osx
+      # macOS 10.10 Yosemite
+      osx_image: xcode6.4
     - language: android
       env: OS=android
       android:
