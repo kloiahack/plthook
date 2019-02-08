@@ -35,7 +35,7 @@ if test "$TRAVIS" = true; then
   echo
 fi
 
-echodo ndk-build -B
+echodo ndk-build
 
 API=25
 TAG=google_apis
@@ -59,6 +59,7 @@ for ABI in $ABIS; do
 
   echodo adb wait-for-device
   echodo adb root
+  sleep 1
   echodo adb push libs/$ABI/libtest.so /data/local
   echodo adb push libs/$ABI/testprog /data/local
   echodo adb shell "chmod 755 /data/local/libtest.so /data/local/testprog"

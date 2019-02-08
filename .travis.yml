@@ -49,7 +49,7 @@ matrix:
       android:
         components:
           - sys-img-arm64-v8a-google_apis-25
-          #- sys-img-armeabi-v7a-google_apis-25
+          - sys-img-armeabi-v7a-google_apis-25
           #- sys-img-x86_64-google_apis-25
           #- sys-img-x86-google_apis-25
 language: c
